@@ -41,10 +41,13 @@ INSTALLED_APPS = [
     'accounts',
     # DRF
     'rest_framework', 
+    'rest_framework_simplejwt', # JWT Token
+    'corsheaders', # CORS
     
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -131,3 +134,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Base User Model Setting
 AUTH_USER_MODEL = 'accounts.User'
+
+
+# REST_FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ( 
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication', # JWT TOKEN
+    ),
+}
+
+# CORS SETTINGS
+CORS_ALLOWED_ORIGINS = [
+		# 허용할 Origin 추가
+    "http://localhost:8080",
+]
