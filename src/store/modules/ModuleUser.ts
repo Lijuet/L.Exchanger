@@ -28,10 +28,11 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
     removeToken() {
       VueCookieNext.removeCookie("accessToken");
       VueCookieNext.removeCookie("refreshToken");
+      location.reload();
     },
   },
   getters: {
-    getToken(state) {
+    getToken() {
       const accessToken = VueCookieNext.getCookie("accessToken");
       const refreshToken = VueCookieNext.getCookie("refreshToken");
       return {
@@ -40,4 +41,5 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
       };
     },
   },
+  actions: {},
 };
