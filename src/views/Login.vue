@@ -43,7 +43,6 @@ export default defineComponent({
     ...mapMutations("moduleUser", ["setToken"]),
     async login() {
       try {
-        console.log(this.backBaseURL);
         const response = await axios({
           method: "POST",
           url: this.backBaseURL + "/accounts/login/",
@@ -59,7 +58,7 @@ export default defineComponent({
             refreshToken: response.data["refresh"],
           });
           this.$router.push({ name: "Home" });
-        }
+        } else alert(response.data["err_msg"]);
       } catch (err) {
         alert("Login Failed! \n=> " + err.message); // TODO:Pretty Alert
       }
