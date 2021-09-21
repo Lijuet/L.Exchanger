@@ -37,7 +37,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         try:
-            if self.action in self.permission_classes_by_action.keys():
+            if self.action == "list":
                 return [permission() for permission in self.permission_classes_by_action[self.action]]
             else:
                 return [permission() for permission in self.permission_classes_by_action['basic']]
