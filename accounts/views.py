@@ -1,6 +1,6 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 import requests
 
 from django.http import JsonResponse
@@ -12,7 +12,7 @@ from .serializer import UserSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+    permission_classes_by_action = {'list':[IsAuthenticated], 'basic':[AllowAny]}
 
     @action(detail=False, methods=['post'])
     def login(self, request):
@@ -31,5 +31,15 @@ class UserViewSet(viewsets.ModelViewSet):
             access, refresh = response.json().get('access'), response.json().get('refresh')
             if access and refresh:
                 return JsonResponse({'access':access, 'refresh':refresh }, status=status.HTTP_200_OK)
+            return JsonResponse({'err_msg': "Incorrect email or password!"}, status=status.HTTP_401_UNAUTHORIZED)
         except Exception as err:
             return JsonResponse({'err_msg': "Incorrect email or password!"}, status=status.HTTP_401_UNAUTHORIZED)
+
+    def get_permissions(self):
+        try:
+            if self.action == "list":
+                return [permission() for permission in self.permission_classes_by_action[self.action]]
+            else:
+                return [permission() for permission in self.permission_classes_by_action['basic']]
+        except:
+            return [permission() for permission in self.permission_classes]

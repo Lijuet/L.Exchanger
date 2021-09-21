@@ -37,16 +37,15 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState("moduleURL", ["backBaseURL"]),
+    ...mapState("moduleURL", ["backBaseURL", "loginURL"]),
   },
   methods: {
     ...mapMutations("moduleUser", ["setToken"]),
     async login() {
       try {
-        console.log(this.backBaseURL);
         const response = await axios({
           method: "POST",
-          url: this.backBaseURL + "/accounts/login/",
+          url: this.backBaseURL + this.loginURL,
           data: {
             email: this.email,
             password: this.password,
@@ -59,7 +58,7 @@ export default defineComponent({
             refreshToken: response.data["refresh"],
           });
           this.$router.push({ name: "Home" });
-        }
+        } else alert(response.data["err_msg"]);
       } catch (err) {
         alert("Login Failed! \n=> " + err.message); // TODO:Pretty Alert
       }
