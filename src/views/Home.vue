@@ -22,7 +22,7 @@ export default defineComponent({
       try {
         const response = await axios({
           method: "GET",
-          url: this.backBaseURL + "/accounts/",
+          url: this.backBaseURL + "accounts/",
         });
 
         if (response.status == 200) {

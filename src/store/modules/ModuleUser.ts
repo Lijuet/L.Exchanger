@@ -2,6 +2,7 @@ import { Module } from "vuex";
 import { RootState } from "../index";
 
 import { VueCookieNext } from "vue-cookie-next";
+import axios from "axios";
 
 export interface ModuleUserState {
   accessToken: string;
@@ -41,5 +42,24 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
       };
     },
   },
-  actions: {},
+  actions: {
+    refreshToken: ({ commit, rootState }) => {
+      console.log("Refresh Token Actions : " + rootState.moduleURL.backBaseURL);
+      return new Promise((resolve, reject) => {
+        axios
+          .post(
+            rootState.moduleURL.backBaseURL + rootState.moduleURL.refreshURL,
+            { refresh: VueCookieNext.getCookie("refreshToken") }
+          )
+          .then((res) => {
+            commit("refreshToken", { accessToken: res.data["access"] });
+            resolve(res.data["refresh"]);
+          })
+          .catch((err) => {
+            console.log("Refresh Action Error : " + err);
+            reject(err.config.data);
+          });
+      });
+    },
+  },
 };

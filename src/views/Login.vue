@@ -37,7 +37,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState("moduleURL", ["backBaseURL"]),
+    ...mapState("moduleURL", ["backBaseURL", "loginURL"]),
   },
   methods: {
     ...mapMutations("moduleUser", ["setToken"]),
@@ -45,7 +45,7 @@ export default defineComponent({
       try {
         const response = await axios({
           method: "POST",
-          url: this.backBaseURL + "/accounts/login/",
+          url: this.backBaseURL + this.loginURL,
           data: {
             email: this.email,
             password: this.password,
