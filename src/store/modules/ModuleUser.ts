@@ -44,7 +44,6 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
   },
   actions: {
     refreshToken: ({ commit, rootState }) => {
-      console.log("Refresh Token Actions : " + rootState.moduleURL.backBaseURL);
       return new Promise((resolve, reject) => {
         axios
           .post(
@@ -56,7 +55,6 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
             resolve(res.data["refresh"]);
           })
           .catch((err) => {
-            console.log("Refresh Action Error : " + err);
             reject(err.config.data);
           });
       });

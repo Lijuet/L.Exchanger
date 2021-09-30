@@ -26,7 +26,6 @@ export default defineComponent({
         });
 
         if (response.status == 200) {
-          console.log("SUCCESS");
           alert(response.data);
         } else alert(response.data["err_msg"]);
       } catch (err) {

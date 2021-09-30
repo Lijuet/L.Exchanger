@@ -38,7 +38,6 @@ class UserViewSet(viewsets.ModelViewSet):
     
     @action(detail=False, methods=['post'])
     def signup(self, request):
-        print(request.data)
         info = UserSerializer(data=request.data)
         if info.is_valid():
             User.objects.create_user(

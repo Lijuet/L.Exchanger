@@ -51,7 +51,6 @@ export default defineComponent({
             password: this.password,
           },
         });
-        console.log(response);
         if (response.status == 200) {
           this.setToken({
             accessToken: response.data["access"],

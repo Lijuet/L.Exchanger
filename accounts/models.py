@@ -22,7 +22,6 @@ class UserManager(BaseUserManager):
             main_language=main_language)
         
         user.is_admin = False
-        print(password)
         user.set_password(password)
         user.save(using=self._db)
         return user

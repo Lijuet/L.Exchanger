@@ -88,7 +88,6 @@ export default defineComponent({
   methods: {
     async signUp() {
       try {
-        console.log(this.backBaseURL + this.signUpURL);
         const response = await axios({
           method: "POST",
           url: this.backBaseURL + this.signUpURL,
@@ -96,7 +95,6 @@ export default defineComponent({
         });
 
         if (response.status == 200) {
-          console.log(response.data);
           alert("Sign Up Success! Go to Login page");
           this.$router.push({ name: "Login" });
         }
