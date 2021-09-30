@@ -5,6 +5,7 @@ export interface ModuleURLState {
   backBaseURL: string;
   refreshURL: string;
   loginURL: string;
+  signUpURL: string;
 }
 
 export const moduleURL: Module<ModuleURLState, RootState> = {
@@ -13,5 +14,6 @@ export const moduleURL: Module<ModuleURLState, RootState> = {
     backBaseURL: "http://localhost:8000/",
     refreshURL: "accounts/api/token/refresh/",
     loginURL: "accounts/login/",
+    signUpURL: "accounts/signup/",
   },
 };

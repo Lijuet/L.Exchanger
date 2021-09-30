@@ -3,6 +3,7 @@ import { VueCookieNext } from "vue-cookie-next";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import SignUp from "@/views/SignUp.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp,
   },
 ];
 
@@ -29,7 +35,11 @@ router.beforeEach(async (to, from, next) => {
   ) {
     await store.dispatch("refreshToken");
   }
-  if (to.name == "Login" || VueCookieNext.getCookie("accessToken"))
+  if (
+    to.name == "Login" ||
+    to.name == "SignUp" ||
+    VueCookieNext.getCookie("accessToken")
+  )
     return next();
   else if (
     VueCookieNext.getCookie("accessToken") === null &&

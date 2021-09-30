@@ -17,8 +17,8 @@
         placeholder="Password"
       />
 
-      <a align="center" @click="login"> Jump to L.Exchanger </a>
-      <p align="center" @click="signup">Sign Up</p>
+      <a align="center" @click="login">Jump to L.Exchanger</a>
+      <button align="center" @click="signup">Sign Up</button>
     </form>
   </div>
 </template>
@@ -51,7 +51,6 @@ export default defineComponent({
             password: this.password,
           },
         });
-
         if (response.status == 200) {
           this.setToken({
             accessToken: response.data["access"],
@@ -62,6 +61,9 @@ export default defineComponent({
       } catch (err) {
         alert("Login Failed! \n=> " + err.message); // TODO:Pretty Alert
       }
+    },
+    signup() {
+      this.$router.push({ name: "SignUp" });
     },
   },
 });
