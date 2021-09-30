@@ -35,6 +35,22 @@ class UserViewSet(viewsets.ModelViewSet):
         except Exception as err:
             return JsonResponse({'err_msg': "Incorrect email or password!"}, status=status.HTTP_401_UNAUTHORIZED)
 
+    
+    @action(detail=False, methods=['post'])
+    def signup(self, request):
+        print(request.data)
+        info = UserSerializer(data=request.data)
+        if info.is_valid():
+            User.objects.create_user(
+                email=request.data.get('email'),
+                username=request.data.get('username'),
+                password=request.data.get('password'),
+                main_language=request.data.get('main_language')
+            )
+            return JsonResponse(info.data, status=status.HTTP_200_OK)
+        else:
+            return JsonResponse(info._errors, status=status.HTTP_400_BAD_REQUEST)
+
     def get_permissions(self):
         try:
             if self.action == "list":

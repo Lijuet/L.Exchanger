@@ -5,7 +5,10 @@ import { VueCookieNext } from "vue-cookie-next";
 // Add a request interceptor
 axios.interceptors.request.use(
   function (config) {
-    if (config.url != "http://localhost:8000/accounts/login/")
+    if (
+      config.url != "http://localhost:8000/accounts/login/" &&
+      config.url != "http://localhost:8000/accounts/signup/"
+    )
       config.headers["Authorization"] =
         "Bearer " + VueCookieNext.getCookie("accessToken");
     console.log("[axios.interceptors.request] request : ", config);
