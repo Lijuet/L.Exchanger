@@ -5,10 +5,6 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 
-LANGUAGE={
-    ("ko", "Korean"),
-    ("en", "English"),
-}
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -44,6 +40,15 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     
+    LANGUAGE_CHOICES={
+        ("ko", "Korean"),
+        ("en", "English"),
+    }
+    GOAL_CHOICES={
+        ("conv", "Conversation"),
+        ("test", "Test"),
+    }
+    
     email = models.EmailField(
         max_length=255,
         unique=True,
@@ -58,8 +63,23 @@ class User(AbstractBaseUser):
 
     main_language = models.CharField(
         max_length=3,
-        choices=LANGUAGE,
-        verbose_name="Main Language"
+        choices=LANGUAGE_CHOICES,
+        verbose_name="Main Language",
+        default="ko"
+    )
+
+    study_language = models.CharField(
+        max_length=3,
+        choices=LANGUAGE_CHOICES,
+        verbose_name="Study Language",
+        default="en"
+    )
+
+    goal = models.CharField(
+        max_length=4,
+        choices=GOAL_CHOICES,
+        verbose_name="Goal",
+        default="conv"
     )
 
     date_joined = models.DateTimeField(auto_now_add=True, editable=False)

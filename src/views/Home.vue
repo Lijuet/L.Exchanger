@@ -26,7 +26,7 @@ export default defineComponent({
         });
 
         if (response.status == 200) {
-          alert(response.data);
+          alert(JSON.stringify(response.data));
         } else alert(response.data["err_msg"]);
       } catch (err) {
         alert("Load Login Information Failed! \n=> " + err.message); // TODO:Pretty Alert

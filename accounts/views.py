@@ -44,7 +44,9 @@ class UserViewSet(viewsets.ModelViewSet):
                 email=request.data.get('email'),
                 username=request.data.get('username'),
                 password=request.data.get('password'),
-                main_language=request.data.get('main_language')
+                main_language=request.data.get('main_language'),
+                study_language=request.data.get('study_language'),
+                goal=request.data.get('goal')
             )
             return JsonResponse(info.data, status=status.HTTP_200_OK)
         else:
