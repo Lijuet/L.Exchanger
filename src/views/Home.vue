@@ -2,14 +2,13 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <button @click="removeToken">Logout</button>
-    <button @click="testToken">Get Information</button>
+    <button @click="autoMatchGroup">Auto Matching</button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState, mapMutations } from "vuex";
-import axios from "axios";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default defineComponent({
   name: "Home",
@@ -18,20 +17,7 @@ export default defineComponent({
   },
   methods: {
     ...mapMutations("moduleUser", ["removeToken"]),
-    async testToken() {
-      try {
-        const response = await axios({
-          method: "GET",
-          url: this.backBaseURL + "accounts/",
-        });
-
-        if (response.status == 200) {
-          alert(JSON.stringify(response.data));
-        } else alert(response.data["err_msg"]);
-      } catch (err) {
-        alert("Load Login Information Failed! \n=> " + err.message); // TODO:Pretty Alert
-      }
-    },
+    ...mapActions("moduleMatch", ["autoMatchGroup"]),
   },
 });
 </script>

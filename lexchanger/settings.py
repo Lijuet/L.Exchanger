@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # APPS
     'accounts',
+    'groups',
     # DRF
     'rest_framework', 
     'rest_framework_simplejwt', # JWT Token
