@@ -29,6 +29,7 @@ class UserViewSet(viewsets.ModelViewSet):
                         'access':access, 
                         'refresh':refresh,
                         'user_id': user_info.id, 
+                        'email': user_info.email,
                         'username': user_info.username, 
                         'main_language' : user_info.main_language }, 
                     status=status.HTTP_200_OK)

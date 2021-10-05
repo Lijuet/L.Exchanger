@@ -9,6 +9,7 @@ export interface ModuleUserState {
   accessToken: string;
   refreshToken: string;
   userID: number;
+  userEmail: string;
   userName: string;
   userMainLanguage: string;
 }
@@ -19,12 +20,14 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
     accessToken: "",
     refreshToken: "",
     userID: 0,
+    userEmail: "",
     userName: "",
     userMainLanguage: "",
   },
   mutations: {
     setUserInfo(state, payload) {
       state.userID = payload.userID;
+      state.userEmail = payload.email;
       state.userName = payload.userName;
       state.userMainLanguage = payload.userMainLangugae;
     },
@@ -70,6 +73,7 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
             });
             commit("setUserInfo", {
               userID: res.data["user_id"],
+              userEmail: res.data["email"],
               userName: res.data["username"],
               userMainLanguage: res.data["main_language"],
             });
