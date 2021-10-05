@@ -18,7 +18,7 @@ export const moduleMatch: Module<ModuleMatchState, RootState> = {
     autoMatchGroup: ({ rootState }) => {
       return new Promise((resolve, reject) => {
         axios
-          .post(
+          .get(
             rootState.moduleURL.backBaseURL + rootState.moduleURL.autoMatchURL
           )
           .then((res) => {

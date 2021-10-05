@@ -17,7 +17,11 @@
         placeholder="Password"
       />
 
-      <a align="center" @click="login">Jump to L.Exchanger</a>
+      <a
+        align="center"
+        @click="login({ email: this.email, password: this.password })"
+        >Jump to L.Exchanger</a
+      >
       <button align="center" @click="signup">Sign Up</button>
     </form>
   </div>
@@ -25,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import axios from "axios";
 
 export default defineComponent({
@@ -36,32 +40,8 @@ export default defineComponent({
       password: "",
     };
   },
-  computed: {
-    ...mapState("moduleURL", ["backBaseURL", "loginURL"]),
-  },
   methods: {
-    ...mapMutations("moduleUser", ["setToken"]),
-    async login() {
-      try {
-        const response = await axios({
-          method: "POST",
-          url: this.backBaseURL + this.loginURL,
-          data: {
-            email: this.email,
-            password: this.password,
-          },
-        });
-        if (response.status == 200) {
-          this.setToken({
-            accessToken: response.data["access"],
-            refreshToken: response.data["refresh"],
-          });
-          this.$router.push({ name: "Home" });
-        } else alert(response.data["err_msg"]);
-      } catch (err) {
-        alert("Login Failed! \n=> " + err.message); // TODO:Pretty Alert
-      }
-    },
+    ...mapActions("moduleUser", ["login"]),
     signup() {
       this.$router.push({ name: "SignUp" });
     },

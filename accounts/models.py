@@ -44,6 +44,7 @@ class User(AbstractBaseUser):
         ("ko", "Korean"),
         ("en", "English"),
     }
+
     GOAL_CHOICES={
         ("conv", "Conversation"),
         ("test", "Test"),
@@ -66,13 +67,6 @@ class User(AbstractBaseUser):
         choices=LANGUAGE_CHOICES,
         verbose_name="Main Language",
         default="ko"
-    )
-
-    study_language = models.CharField(
-        max_length=3,
-        choices=LANGUAGE_CHOICES,
-        verbose_name="Study Language",
-        default="en"
     )
 
     goal = models.CharField(

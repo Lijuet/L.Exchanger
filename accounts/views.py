@@ -17,20 +17,21 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'])
     def login(self, request):
 
-        """
-        Login Info
-        """
         email = request.data['email']
         password = request.data['password']
 
-        """
-        JWT Token
-        """
         try:
             response = requests.post("http://127.0.0.1:8000/accounts/api/token/",  data={'email':email, 'password':password})
             access, refresh = response.json().get('access'), response.json().get('refresh')
             if access and refresh:
-                return JsonResponse({'access':access, 'refresh':refresh }, status=status.HTTP_200_OK)
+                user_info = User.objects.get(email=email)
+                return JsonResponse({
+                        'access':access, 
+                        'refresh':refresh,
+                        'user_id': user_info.id, 
+                        'username': user_info.username, 
+                        'main_language' : user_info.main_language }, 
+                    status=status.HTTP_200_OK)
             return JsonResponse({'err_msg': "Incorrect email or password!"}, status=status.HTTP_401_UNAUTHORIZED)
         except Exception as err:
             return JsonResponse({'err_msg': "Incorrect email or password!"}, status=status.HTTP_401_UNAUTHORIZED)
@@ -45,7 +46,6 @@ class UserViewSet(viewsets.ModelViewSet):
                 username=request.data.get('username'),
                 password=request.data.get('password'),
                 main_language=request.data.get('main_language'),
-                study_language=request.data.get('study_language'),
                 goal=request.data.get('goal')
             )
             return JsonResponse(info.data, status=status.HTTP_200_OK)
