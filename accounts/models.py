@@ -8,21 +8,23 @@ from django.contrib.auth.models import (
 
 # Create your models here.
 class UserManager(BaseUserManager):
-    def create_user(self, email, username, password, main_language, **extra_fields):
+    def create_user(self, email, username, password, main_language, study_language, goal, **extra_fields):
         if not email:
             raise ValueError('User must have an email address')
 
         user = self.model(
             email=email,
             username=username,
-            main_language=main_language)
+            main_language=main_language,
+            study_language=study_language,
+            goal=goal)
         
         user.is_admin = False
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password, main_language, **extra_fields):
+    def create_superuser(self, email, username, password, main_language, study_language, goal, **extra_fields):
         if not email:
             raise ValueError('User must have an email address')
 
@@ -31,6 +33,8 @@ class UserManager(BaseUserManager):
             username=username,
             password=password,
             main_language=main_language,
+            study_language=study_language,
+            goal=goal,
             **extra_fields)
 
         user.is_admin = True
@@ -69,6 +73,13 @@ class User(AbstractBaseUser):
         default="ko"
     )
 
+    study_language = models.CharField(
+        max_length=3,
+        choices=LANGUAGE_CHOICES,
+        verbose_name="Study Language",
+        default="en"
+    )
+
     goal = models.CharField(
         max_length=4,
         choices=GOAL_CHOICES,
@@ -84,7 +95,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'main_language']
+    REQUIRED_FIELDS = ['username', 'main_language', 'study_language', 'goal']
 
     def __str__(self):
         return self.email

@@ -12,6 +12,8 @@ export interface ModuleUserState {
   userEmail: string;
   userName: string;
   userMainLanguage: string;
+  userStudyLanguage: string;
+  userGoal: string;
 }
 
 export const moduleUser: Module<ModuleUserState, RootState> = {
@@ -23,13 +25,17 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
     userEmail: "",
     userName: "",
     userMainLanguage: "",
+    userStudyLanguage: "",
+    userGoal: "",
   },
   mutations: {
     setUserInfo(state, payload) {
       state.userID = payload.userID;
-      state.userEmail = payload.email;
+      state.userEmail = payload.userEmail;
       state.userName = payload.userName;
       state.userMainLanguage = payload.userMainLangugae;
+      state.userStudyLanguage = payload.userStudyLanguage;
+      state.userGoal = payload.userGoal;
     },
     setToken(state, payload) {
       VueCookieNext.setCookie("accessToken", payload.accessToken);
@@ -76,6 +82,8 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
               userEmail: res.data["email"],
               userName: res.data["username"],
               userMainLanguage: res.data["main_language"],
+              userStudyLanguage: res.data["study_language"],
+              userGoal: res.data["goal"],
             });
             router.push({ name: "Home" });
           })

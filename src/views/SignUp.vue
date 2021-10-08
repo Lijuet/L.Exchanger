@@ -61,6 +61,22 @@
       </div>
 
       <div class="mb-3">
+        <label for="inputStudyLanguage" class="form-label">
+          Study Language
+        </label>
+        <select
+          id="inputStudyLanguage"
+          class="form-select"
+          v-model="form.study_language"
+          required
+        >
+          <option selected>Select study language</option>
+          <option value="en">English</option>
+          <option value="ko">Korean</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
         <label for="inputGoal" class="form-label">Goal for study</label>
         <select id="inputGoal" class="form-select" v-model="form.goal" required>
           <option selected>Select goal</option>
@@ -88,6 +104,7 @@ export default defineComponent({
         username: "",
         password: "",
         main_language: "Select main language",
+        study_language: "Select study language",
         goal: "Select goal",
       },
     };

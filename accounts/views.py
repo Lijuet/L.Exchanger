@@ -31,7 +31,9 @@ class UserViewSet(viewsets.ModelViewSet):
                         'user_id': user_info.id, 
                         'email': user_info.email,
                         'username': user_info.username, 
-                        'main_language' : user_info.main_language }, 
+                        'main_language' : user_info.main_language,
+                        'study_language' : user_info.study_language,
+                        'goal':user_info.goal }, 
                     status=status.HTTP_200_OK)
             return JsonResponse({'err_msg': "Incorrect email or password!"}, status=status.HTTP_401_UNAUTHORIZED)
         except Exception as err:
@@ -47,6 +49,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 username=request.data.get('username'),
                 password=request.data.get('password'),
                 main_language=request.data.get('main_language'),
+                study_language=request.data.get('study_language'),
                 goal=request.data.get('goal')
             )
             return JsonResponse(info.data, status=status.HTTP_200_OK)

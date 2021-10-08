@@ -16,6 +16,6 @@ export const moduleURL: Module<ModuleURLState, RootState> = {
     refreshURL: "accounts/api/token/refresh/",
     loginURL: "accounts/login/",
     signUpURL: "accounts/signup/",
-    autoMatchURL: "groups/",
+    autoMatchURL: "groups/autoMatch/",
   },
 };

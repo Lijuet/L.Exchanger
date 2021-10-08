@@ -15,14 +15,18 @@ export const moduleMatch: Module<ModuleMatchState, RootState> = {
   getters: {},
   mutations: {},
   actions: {
-    autoMatchGroup: ({ rootState }) => {
+    autoMatchGroup: ({ rootState }, data) => {
       return new Promise((resolve, reject) => {
         axios
-          .get(
-            rootState.moduleURL.backBaseURL + rootState.moduleURL.autoMatchURL
+          .post(
+            rootState.moduleURL.backBaseURL + rootState.moduleURL.autoMatchURL,
+            {
+              email: rootState.moduleUser.userEmail,
+              studyLanguage: data.studyLanguage,
+            }
           )
           .then((res) => {
-            console.log(res.data);
+            console.log(JSON.parse(res.data["result"]));
           })
           .catch((err) => {
             reject(err.config.data);
