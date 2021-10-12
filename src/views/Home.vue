@@ -32,7 +32,6 @@
 import store from "@/store";
 import { defineComponent } from "vue";
 import { mapState, mapMutations, mapActions } from "vuex";
-// const store = useStore();
 
 export default defineComponent({
   name: "Home",
