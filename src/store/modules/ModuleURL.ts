@@ -7,6 +7,7 @@ export interface ModuleURLState {
   loginURL: string;
   signUpURL: string;
   autoMatchURL: string;
+  studyGroupURL: string;
 }
 
 export const moduleURL: Module<ModuleURLState, RootState> = {
@@ -17,5 +18,6 @@ export const moduleURL: Module<ModuleURLState, RootState> = {
     loginURL: "accounts/login/",
     signUpURL: "accounts/signup/",
     autoMatchURL: "groups/autoMatch/",
+    studyGroupURL: "groups/studyGroup/",
   },
 };

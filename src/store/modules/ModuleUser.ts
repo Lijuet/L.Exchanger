@@ -33,7 +33,7 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
       state.userID = payload.userID;
       state.userEmail = payload.userEmail;
       state.userName = payload.userName;
-      state.userMainLanguage = payload.userMainLangugae;
+      state.userMainLanguage = payload.userMainLanguage;
       state.userStudyLanguage = payload.userStudyLanguage;
       state.userGoal = payload.userGoal;
     },

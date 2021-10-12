@@ -26,7 +26,32 @@ export const moduleMatch: Module<ModuleMatchState, RootState> = {
             }
           )
           .then((res) => {
-            console.log(JSON.parse(res.data["result"]));
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err.config.data);
+          });
+      });
+    },
+    makeStudyGroup: ({ rootState }, data) => {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(
+            rootState.moduleURL.backBaseURL + rootState.moduleURL.studyGroupURL,
+            {
+              studyLanguages: [
+                rootState.moduleUser.userMainLanguage,
+                data["studyLanguage"],
+              ],
+              wishMembers: [
+                ...data["wishMembers"],
+                rootState.moduleUser.userEmail,
+              ],
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            resolve(res);
           })
           .catch((err) => {
             reject(err.config.data);
