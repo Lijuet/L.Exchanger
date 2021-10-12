@@ -3,6 +3,8 @@ import { moduleURL, ModuleURLState } from "@/store/modules/ModuleURL";
 import { moduleUser, ModuleUserState } from "@/store/modules/ModuleUser";
 import { moduleMatch, ModuleMatchState } from "@/store/modules/ModuleMatch";
 
+import createPersistedState from "vuex-persistedstate";
+
 export interface RootState {
   moduleURL: ModuleURLState;
   moduleUser: ModuleUserState;
@@ -15,4 +17,9 @@ export default createStore({
     moduleUser,
     moduleMatch,
   },
+  plugins: [
+    createPersistedState({
+      paths: ["moduleUser"],
+    }),
+  ],
 });
