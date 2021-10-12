@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../assets/img/logo.png" />
     <button @click="removeToken">Logout</button>
     <button @click="listAutoMatchResult">Auto Matching</button>
     <div>
