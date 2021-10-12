@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # APPS
     'accounts',
+    'groups',
     # DRF
     'rest_framework', 
     'rest_framework_simplejwt', # JWT Token
@@ -83,8 +84,12 @@ WSGI_APPLICATION = 'lexchanger.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'lexchanger_db',
+        'USER': 'ladmin',
+        'PASSWORD': 'chris0409',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

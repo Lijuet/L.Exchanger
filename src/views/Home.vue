@@ -2,35 +2,58 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <button @click="removeToken">Logout</button>
-    <button @click="testToken">Get Information</button>
+    <button @click="listAutoMatchResult">Auto Matching</button>
+    <div>
+      <div v-for="(member, key) in ableMembers" :key="key">
+        <input
+          type="checkbox"
+          :id="member.email"
+          :value="member.email"
+          v-model="wishMembers"
+        />
+        <label :for="member.email">{{ member }}</label>
+      </div>
+      <button
+        @click="
+          makeStudyGroup({
+            wishMembers: wishMembers,
+            studyLanguage: this.studyLanguage,
+          })
+        "
+      >
+        Make Study Group
+      </button>
+      <span>Checked email: {{ wishMembers }}</span>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import store from "@/store";
 import { defineComponent } from "vue";
-import { mapState, mapMutations } from "vuex";
-import axios from "axios";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default defineComponent({
   name: "Home",
+  data() {
+    return {
+      studyLanguage: "ko",
+      ableMembers: [],
+      wishMembers: [],
+    };
+  },
   computed: {
     ...mapState("moduleURL", ["backBaseURL"]),
+    ...mapState("moduleUser", ["userEmail"]),
   },
   methods: {
     ...mapMutations("moduleUser", ["removeToken"]),
-    async testToken() {
-      try {
-        const response = await axios({
-          method: "GET",
-          url: this.backBaseURL + "accounts/",
-        });
-
-        if (response.status == 200) {
-          alert(response.data);
-        } else alert(response.data["err_msg"]);
-      } catch (err) {
-        alert("Load Login Information Failed! \n=> " + err.message); // TODO:Pretty Alert
-      }
+    ...mapActions("moduleMatch", ["makeStudyGroup"]),
+    async listAutoMatchResult() {
+      const result = await store.dispatch("moduleMatch/autoMatchGroup", {
+        studyLanguage: this.studyLanguage,
+      });
+      this.ableMembers = JSON.parse(result.data["result"]);
     },
   },
 });

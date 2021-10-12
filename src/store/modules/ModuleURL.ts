@@ -6,6 +6,8 @@ export interface ModuleURLState {
   refreshURL: string;
   loginURL: string;
   signUpURL: string;
+  autoMatchURL: string;
+  studyGroupURL: string;
 }
 
 export const moduleURL: Module<ModuleURLState, RootState> = {
@@ -15,5 +17,7 @@ export const moduleURL: Module<ModuleURLState, RootState> = {
     refreshURL: "accounts/api/token/refresh/",
     loginURL: "accounts/login/",
     signUpURL: "accounts/signup/",
+    autoMatchURL: "groups/autoMatch/",
+    studyGroupURL: "groups/studyGroup/",
   },
 };

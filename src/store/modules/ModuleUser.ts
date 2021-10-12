@@ -3,10 +3,17 @@ import { RootState } from "../index";
 
 import { VueCookieNext } from "vue-cookie-next";
 import axios from "axios";
+import router from "@/router";
 
 export interface ModuleUserState {
   accessToken: string;
   refreshToken: string;
+  userID: number;
+  userEmail: string;
+  userName: string;
+  userMainLanguage: string;
+  userStudyLanguage: string;
+  userGoal: string;
 }
 
 export const moduleUser: Module<ModuleUserState, RootState> = {
@@ -14,8 +21,22 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
   state: {
     accessToken: "",
     refreshToken: "",
+    userID: 0,
+    userEmail: "",
+    userName: "",
+    userMainLanguage: "",
+    userStudyLanguage: "",
+    userGoal: "",
   },
   mutations: {
+    setUserInfo(state, payload) {
+      state.userID = payload.userID;
+      state.userEmail = payload.userEmail;
+      state.userName = payload.userName;
+      state.userMainLanguage = payload.userMainLanguage;
+      state.userStudyLanguage = payload.userStudyLanguage;
+      state.userGoal = payload.userGoal;
+    },
     setToken(state, payload) {
       VueCookieNext.setCookie("accessToken", payload.accessToken);
       VueCookieNext.setCookie("refreshToken", payload.refreshToken);
@@ -43,6 +64,35 @@ export const moduleUser: Module<ModuleUserState, RootState> = {
     },
   },
   actions: {
+    login: ({ commit, rootState }, data) => {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(
+            rootState.moduleURL.backBaseURL + rootState.moduleURL.loginURL,
+            { email: data.email, password: data.password }
+          )
+          .then((res) => {
+            console.log(res.data);
+            commit("setToken", {
+              accessToken: res.data["access"],
+              refreshToken: res.data["refresh"],
+            });
+            commit("setUserInfo", {
+              userID: res.data["user_id"],
+              userEmail: res.data["email"],
+              userName: res.data["username"],
+              userMainLanguage: res.data["main_language"],
+              userStudyLanguage: res.data["study_language"],
+              userGoal: res.data["goal"],
+            });
+            router.push({ name: "Home" });
+          })
+          .catch((err) => {
+            alert(err.message);
+            reject(err.config.data);
+          });
+      });
+    },
     refreshToken: ({ commit, rootState }) => {
       return new Promise((resolve, reject) => {
         axios
