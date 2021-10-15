@@ -52,3 +52,12 @@ class GroupViewSet(viewsets.ModelViewSet):
             return JsonResponse(info.data, status=status.HTTP_200_OK)
         else:
             return JsonResponse(info._errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['post'])
+    def searchGroup(self, request):
+        study_languages = request.data["studyLanguages"]
+        
+        queryset = Group.objects.filter(study_languages__contains=study_languages).values()
+        serialized_response = json.dumps(list(queryset))
+
+        return JsonResponse({"result": serialized_response}, status=status.HTTP_200_OK)

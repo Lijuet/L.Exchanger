@@ -59,7 +59,7 @@
                 <select
                   class="form-select mb-3"
                   id="inputStudyLanguage"
-                  v-model="this.study_language"
+                  v-model="studyLanguage"
                 >
                   <option selected>Select study language</option>
                   <option value="en">English</option>
@@ -90,23 +90,8 @@
         </div>
         <!-- Card deck -->
       </div>
-      <div class="">
-        <div>
-          <button>Make New Study Group</button>
-        </div>
-        <div>
-          <div>
-            <button>Search Study Group</button>
-            <select v-model="this.studyLanguage">
-              <option selected>Select language to study</option>
-              <option value="en">English</option>
-              <option value="ko">Korean</option>
-            </select>
-          </div>
-        </div>
-      </div>
     </section>
-    <button @click="removeToken">Logout</button>
+    <!-- <button @click="removeToken">Logout</button>
     <button @click="listAutoMatchResult">Auto Matching</button>
     <div>
       <div v-for="(member, key) in ableMembers" :key="key">
@@ -129,7 +114,7 @@
         Make Study Group
       </button>
       <span>Checked email: {{ wishMembers }}</span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -142,7 +127,7 @@ export default defineComponent({
   name: "Home",
   data() {
     return {
-      studyLanguage: "ko",
+      studyLanguage: "",
       ableMembers: [],
       wishMembers: [],
     };
