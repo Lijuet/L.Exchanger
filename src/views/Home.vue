@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid img-background">
+  <div class="gradient-form container-fluid img-background">
     <section class="cotainer py-5 h-100">
       <div class="container">
         <div class="card-deck row justify-content-around">
