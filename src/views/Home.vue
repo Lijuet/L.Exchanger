@@ -17,10 +17,13 @@
               </div>
 
               <div class="card-body">
-                <h4 class="card-title">Make New Study Group</h4>
+                <h4 class="card-title" :style="{ color: 'red' }">
+                  Make New Study Group
+                </h4>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  Is there any study group <br />
+                  you're looking for? <br />
+                  <b> Create your own study group. </b>
                 </p>
                 <button
                   type="button"
@@ -51,10 +54,15 @@
                 </a>
               </div>
               <div class="card-body">
-                <h4 class="card-title">Search Study Group</h4>
+                <h4 class="card-title" :style="{ color: 'red' }">
+                  Search Study Group
+                </h4>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  Don't you have a study group yet? <br />
+                  <b>
+                    Find the right study group for you <br />
+                    with just one click.
+                  </b>
                 </p>
                 <button
                   type="button"
@@ -78,33 +86,8 @@
             </div>
           </div>
         </div>
-        <!-- Card deck -->
       </div>
     </section>
-    <!-- <button @click="removeToken">Logout</button>
-    <button @click="listAutoMatchResult">Auto Matching</button>
-    <div>
-      <div v-for="(member, key) in ableMembers" :key="key">
-        <input
-          type="checkbox"
-          :id="member.email"
-          :value="member.email"
-          v-model="wishMembers"
-        />
-        <label :for="member.email">{{ member }}</label>
-      </div>
-      <button
-        @click="
-          makeStudyGroup({
-            wishMembers: wishMembers,
-            studyLanguage: this.studyLanguage,
-          })
-        "
-      >
-        Make Study Group
-      </button>
-      <span>Checked email: {{ wishMembers }}</span>
-    </div> -->
   </div>
 </template>
 

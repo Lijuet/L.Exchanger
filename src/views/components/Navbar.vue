@@ -11,7 +11,7 @@
           loading="lazy"
         />
         <div class="row">
-          <span :style="{ fontSize: '13px', color: 'black' }">
+          <span :style="{ fontSize: '18px', color: 'black' }">
             <b> Level 10 </b> | Next Level
           </span>
           <img class="mx-1" src="../../assets/img/energyBar.png" height="22" />
