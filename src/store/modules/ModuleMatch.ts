@@ -50,7 +50,28 @@ export const moduleMatch: Module<ModuleMatchState, RootState> = {
             }
           )
           .then((res) => {
-            console.log(res);
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err.config.data);
+          });
+      });
+    },
+    searchGroup: ({ rootState }, data) => {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(
+            rootState.moduleURL.backBaseURL +
+              rootState.moduleURL.searchGroupURL,
+            {
+              studyLanguages: [
+                data["studyLanguage"],
+                rootState.moduleUser.userMainLanguage,
+              ],
+            }
+          )
+          .then((res) => {
+            console.log(res.data["result"]);
             resolve(res);
           })
           .catch((err) => {
