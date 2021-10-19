@@ -56,15 +56,6 @@
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </p>
-                <select
-                  class="form-select mb-3"
-                  id="inputStudyLanguage"
-                  v-model="studyLanguage"
-                >
-                  <option selected>Select study language</option>
-                  <option value="en">English</option>
-                  <option value="ko">Korean</option>
-                </select>
                 <button
                   type="button"
                   class="
@@ -78,7 +69,6 @@
                   @click="
                     $router.push({
                       path: 'searchgroup',
-                      query: { studyLanguage: this.studyLanguage },
                     })
                   "
                 >
