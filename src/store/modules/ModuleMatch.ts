@@ -39,14 +39,9 @@ export const moduleMatch: Module<ModuleMatchState, RootState> = {
           .post(
             rootState.moduleURL.backBaseURL + rootState.moduleURL.studyGroupURL,
             {
-              studyLanguages: [
-                rootState.moduleUser.userMainLanguage,
-                data["studyLanguage"],
-              ],
-              wishMembers: [
-                ...data["wishMembers"],
-                rootState.moduleUser.userEmail,
-              ],
+              groupName: data.form["groupName"],
+              studyLanguages: data.form["studyLanguages"],
+              wishMembers: [rootState.moduleUser.userEmail],
             }
           )
           .then((res) => {
@@ -71,7 +66,6 @@ export const moduleMatch: Module<ModuleMatchState, RootState> = {
             }
           )
           .then((res) => {
-            console.log(res.data["result"]);
             resolve(res);
           })
           .catch((err) => {

@@ -82,12 +82,15 @@
               </div>
               <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                 <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                  <h4 class="mb-4">We are more than just a company</h4>
+                  <h4 class="mb-4">Find your best foreign friends!!</h4>
                   <p class="small mb-0">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Is it very expensive?<br />
+                    No, it's free.<br />
+                    Is it a one-time event?<br />
+                    No, set a time and meet regularly to study.<br />
+                    Is there someone else with a different purpose? <br />
+                    No, you don't have to worry <br />
+                    because you only study in groups, not one-on-one.
                   </p>
                 </div>
               </div>

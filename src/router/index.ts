@@ -5,6 +5,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import SignUp from "@/views/SignUp.vue";
 import SearchGroup from "@/views/SearchGroup.vue";
+import MakeGroup from "@/views/MakeGroup.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -26,6 +27,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/searchgroup",
     name: "SearchGroup",
     component: SearchGroup,
+  },
+  {
+    path: "/makegroup",
+    name: "MakeGroup",
+    component: MakeGroup,
   },
 ];
 

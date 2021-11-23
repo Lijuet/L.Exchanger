@@ -19,6 +19,22 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
     @action(detail=False, methods=['post'])
+    def studyGroup(self, request):
+        print(request.data)
+        info = GroupSerializer(data=request.data)
+        if info.is_valid():
+            Group.objects.create_group(
+                group_name=request.data.get('groupName'),
+                study_languages=request.data.get('studyLanguages'),
+                wish_members=request.data.get('wishMembers'),
+            )
+            return JsonResponse(info.data, status=status.HTTP_200_OK)
+        else:
+            return JsonResponse(info._errors, status=status.HTTP_400_BAD_REQUEST)
+
+        
+
+    @action(detail=False, methods=['post'])
     def autoMatch(self, request):
         '''
         # Input
@@ -43,15 +59,15 @@ class GroupViewSet(viewsets.ModelViewSet):
         return JsonResponse({"result": serialized_response}, status=status.HTTP_200_OK)
     
 
-    @action(detail=False, methods=['post'])
-    def studyGroup(self, request):
-        info = GroupSerializer(data=request.data)
-        if info.is_valid():
-            Group.objects.create_group("study_group_test", request.data["studyLanguages"], request.data["wishMembers"]
-            )
-            return JsonResponse(info.data, status=status.HTTP_200_OK)
-        else:
-            return JsonResponse(info._errors, status=status.HTTP_400_BAD_REQUEST)
+    # @action(detail=False, methods=['post'])
+    # def studyGroup(self, request):
+    #     info = GroupSerializer(data=request.data)
+    #     if info.is_valid():
+    #         Group.objects.create_group("study_group_test", request.data["studyLanguages"], request.data["wishMembers"]
+    #         )
+    #         return JsonResponse(info.data, status=status.HTTP_200_OK)
+    #     else:
+    #         return JsonResponse(info._errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['post'])
     def searchGroup(self, request):

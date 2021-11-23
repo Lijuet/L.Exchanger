@@ -1,5 +1,5 @@
 <template>
-  <Navbar v-show="!isLogin" />
+  <Navbar v-show="!noShow" />
   <router-view />
 </template>
 
@@ -12,8 +12,8 @@ export default defineComponent({
     Navbar,
   },
   computed: {
-    isLogin(): boolean {
-      return this.$route.name === "Login";
+    noShow(): boolean {
+      return this.$route.name === "Login" || this.$route.name === "SignUp";
     },
   },
 });

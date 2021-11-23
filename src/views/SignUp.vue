@@ -167,7 +167,7 @@ export default defineComponent({
           this.$router.push({ name: "Login" });
         }
       } catch (err) {
-        alert("Sign Up Failed! \n => " + err.message);
+        // alert("Sign Up Failed! \n => " + err["message"]);
       }
     },
   },

@@ -35,6 +35,11 @@
                     gradient-custom-2
                     mb-3
                   "
+                  @click="
+                    $router.push({
+                      path: 'makegroup',
+                    })
+                  "
                 >
                   CREATE
                 </button>
