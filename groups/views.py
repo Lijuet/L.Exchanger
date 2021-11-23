@@ -20,7 +20,6 @@ class GroupViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def studyGroup(self, request):
-        print(request.data)
         info = GroupSerializer(data=request.data)
         if info.is_valid():
             Group.objects.create_group(
